@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Create mongodb connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workoutdb', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', { useNewUrlParser: true });
 
 // Require routes
 app.use(routes);
