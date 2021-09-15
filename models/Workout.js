@@ -42,7 +42,7 @@ const WorkoutSchema = new Schema({
 });
 
 // Virtual totalDuration - loop over workouts and get total duration
-WorkoutSchema.methods.totalDuration = function() {
+WorkoutSchema.methods.calcDuration = function() {
 
     let duration = 0;
     

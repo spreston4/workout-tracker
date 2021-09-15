@@ -19,9 +19,20 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
 
+        // Find workout
+        // const workoutData = await db.Workout.findOne(
+        //     { _id: req.params.id },
+        //     // { $push: { exercises: req.body }}
+        // );
+
+        // Calculate total duration
+        // const newDuration = await workoutData.calcDuration();
+        // console.log(`New Total Duration: ${newDuration}`);
+
+        // Update workout
         const workoutData = await db.Workout.updateOne(
             { _id: req.params.id },
-            { $push: { exercises: req.body }}
+            { $push: { exercises: req.body } },
         );
 
         res.status(200).json(workoutData);
@@ -35,7 +46,7 @@ router.put('/:id', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
 
-        const workoutData = db.Workout.find({})
+        const workoutData = await db.Workout.find({})
             .sort({ day: -1 })
             .limit(1);
 
