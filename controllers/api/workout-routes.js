@@ -32,6 +32,19 @@ router.put('/:id', async (req, res) => {
 });
 
 // Get last workout
+router.get('/', async (req, res) => {
+    try {
+
+        const workoutData = db.Workout.find({})
+            .sort({ day: -1 })
+            .limit(1);
+
+        res.status(200).json(workoutData);
+
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
 
 // Get workouts in range
 
