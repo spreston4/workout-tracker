@@ -49,6 +49,8 @@ WorkoutSchema.methods.totalDuration = function() {
     for (let i = 0; i < this.exercises.length; i++) {
         duration += this.exercises[i].duration;
     };
+
+    return duration;
 };
 
 // Create model from schema
