@@ -15,6 +15,20 @@ router.post('/', async (req, res) => {
 });
 
 // Edit a workout by adding an exercise
+router.put('/:id', async (req, res) => {
+    try {
+
+        const workoutData = await db.Workout.updateOne(
+            { _id: req.params.id },
+            { $push: { exercises: req.body }}
+        );
+
+        res.status(200).json(workoutData);
+
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
 
 // Get last workout
 
