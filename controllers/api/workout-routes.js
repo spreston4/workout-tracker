@@ -1,6 +1,7 @@
 // Require dependencies
 const router = require('express').Router();
-const Workout = require('../../models/Workout.js');
+const mongoose = require('mongoose');
+const db = require('../../models');
 
 // Create a new workout
 router.post('/', async (req, res) => {
