@@ -32,7 +32,6 @@ router.put('/:id', async (req, res) => {
 
         // Calculate total duration
         const newDuration = await durationData.calcDuration();
-        console.log(newDuration);
 
         // Update workout with total duration
         const updateData = await db.Workout.updateOne(
@@ -40,8 +39,6 @@ router.put('/:id', async (req, res) => {
             { $set: { totalDuration: newDuration } },
         );
        
-        console.log(updateData);
-
         res.status(200).json(updateData);
 
     } catch (err) {
@@ -80,7 +77,6 @@ router.get('/range', async (req, res) => {
         res.status(400).json(err);
     }
 });
-
 
 // Export
 module.exports = router;
