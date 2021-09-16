@@ -19,23 +19,30 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
 
-        // Find workout
-        // const workoutData = await db.Workout.findOne(
-        //     { _id: req.params.id },
-        //     // { $push: { exercises: req.body }}
-        // );
-
-        // Calculate total duration
-        // const newDuration = await workoutData.calcDuration();
-        // console.log(`New Total Duration: ${newDuration}`);
-
-        // Update workout
+        // Update with body info
         const workoutData = await db.Workout.updateOne(
             { _id: req.params.id },
             { $push: { exercises: req.body } },
         );
 
-        res.status(200).json(workoutData);
+        // Retrieve updated record
+        const durationData = await db.Workout.findOne(
+            { _id: req.params.id },
+        );
+
+        // Calculate total duration
+        const newDuration = await durationData.calcDuration();
+        console.log(newDuration);
+
+        // Update workout with total duration
+        const updateData = await db.Workout.updateOne(
+            { _id: req.params.id },
+            { $set: { totalDuration: newDuration } },
+        );
+       
+        console.log(updateData);
+
+        res.status(200).json(updateData);
 
     } catch (err) {
         res.status(400).json(err);
@@ -49,6 +56,7 @@ router.get('/', async (req, res) => {
         const workoutData = await db.Workout.find({})
             .sort({ day: -1 })
             .limit(1);
+
 
         res.status(200).json(workoutData);
 
