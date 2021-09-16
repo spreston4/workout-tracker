@@ -66,6 +66,20 @@ router.get('/', async (req, res) => {
 });
 
 // Get workouts in range
+router.get('/range', async (req, res) => {
+    try {
+
+        const workoutData = await db.Workout.find({})
+            .sort({ day: -1 })
+            .limit(7);
+
+
+        res.status(200).json(workoutData);
+
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
 
 
 // Export
